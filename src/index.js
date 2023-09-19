@@ -12,6 +12,9 @@ handlebarsConfig(app);
 
 app.use(homeController);
 app.use('/cubes', cubeController);
+app.get('*',(req,res)=>{
+res.redirect('/404')
+});
 
 
 
