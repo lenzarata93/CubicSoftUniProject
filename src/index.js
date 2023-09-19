@@ -6,6 +6,8 @@ const handlebarsConfig=require('./config/handlebarsConfig');
 const homeController = require('./controllers/homeController');
 const cubeController = require('./controllers/cubeController');
 const dbConnect = require('./config/dbConfig');
+const accController = require('./controllers/accessoryController');
+
 
 
 
@@ -24,6 +26,8 @@ dbConnect()
 
 app.use(homeController);
 app.use('/cubes', cubeController);
+app.use('/accessories', accController);
+
 app.get('*',(req,res)=>{
 res.redirect('/404');
 });
