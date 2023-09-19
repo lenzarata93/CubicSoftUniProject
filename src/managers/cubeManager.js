@@ -7,7 +7,22 @@ const cubes = [{
     difficultyLevel : 4
 },
 ];
-exports.getAll =() => cubes.slice();
+exports.getAll =(search,from,to) => {
+    let result = cubes.slice();
+
+    if(search){
+        result=result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
+    }
+
+    if(from){
+result.filter(cube => cube.difficultyLevel>=Number(from));
+    }
+
+    if(to){
+result.filter(cube => cube.difficultyLevel<= Number(to));
+    }
+    return result;
+};
 exports.getOne =(cubeId)=> cubes.find(x => x.id == cubeId)
 exports.create = (cubeData) =>{
 const newCube= {
