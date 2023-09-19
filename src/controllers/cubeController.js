@@ -27,7 +27,7 @@ router.get('/:cubeId/details', async(req,res)=>{
     if(!cube){
      return   res.redirect('/404')
     }
-    res.render('details',{cube});
+    res.render('details', {cube});
     });
 
 module.exports=router;
