@@ -1,4 +1,5 @@
 const uniqid = require('uniqid');
+const Cube = require('../models/Cube');
 const cubes = [{
     id:1,
     name: "mirror cube",
@@ -24,11 +25,9 @@ result.filter(cube => cube.difficultyLevel<= Number(to));
     return result;
 };
 exports.getOne =(cubeId)=> cubes.find(x => x.id == cubeId)
-exports.create = (cubeData) =>{
-const newCube= {
-    id: uniqid(),
-    ...cubeData,
-};
-cubes.push(newCube);
-return newCube
+exports.create = async(cubeData) =>{
+    const cube =new Cube(cubeData);
+    await cube.save();
+
+return cube;
 };
