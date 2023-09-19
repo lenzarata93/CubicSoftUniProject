@@ -3,10 +3,10 @@ const express = require('express');
 const  app = express();
 const expressConfig=require('./config/expressConfig');
 const handlebarsConfig=require('./config/handlebarsConfig');
-const homeController = require('./controllers/homeController');
-const cubeController = require('./controllers/cubeController');
+
 const dbConnect = require('./config/dbConfig');
-const accController = require('./controllers/accessoryController');
+const routes = require('./routes');
+
 
 
 
@@ -24,13 +24,7 @@ dbConnect()
     console.log('DB error:', err);
 });
 
-app.use(homeController);
-app.use('/cubes', cubeController);
-app.use('/accessories', accController);
-
-app.get('*',(req,res)=>{
-res.redirect('/404');
-});
+app.use(routes);
 
 
 

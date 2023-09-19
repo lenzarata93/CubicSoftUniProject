@@ -17,7 +17,7 @@ result.filter(cube => cube.difficultyLevel<= Number(to));
     }
     return result;
 };
-exports.getOne =(cubeId)=> console.log(Cube.findById(cubeId));
+exports.getOne =(cubeId)=> Cube.findById(cubeId);
 
 
 
