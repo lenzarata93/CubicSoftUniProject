@@ -1,15 +1,8 @@
 const uniqid = require('uniqid');
 const Cube = require('../models/Cube');
-const cubes = [{
-    id:1,
-    name: "mirror cube",
-    description : 'coolll cubeee',
-    imageUrl : 'https://media.istockphoto.com/id/483822467/photo/classic-rubiks-cube.jpg?s=1024x1024&w=is&k=20&c=qmNUzJD8FLESHFICuCngW0UhbETUEgUAirH4UAgdLEM=',
-    difficultyLevel : 4
-},
-];
-exports.getAll =(search,from,to) => {
-    let result = cubes.slice();
+
+exports.getAll =async(search,from,to) => {
+    let result =await Cube.find().lean();
 
     if(search){
         result=result.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
@@ -24,7 +17,10 @@ result.filter(cube => cube.difficultyLevel<= Number(to));
     }
     return result;
 };
-exports.getOne =(cubeId)=> cubes.find(x => x.id == cubeId)
+exports.getOne =(cubeId)=> Cube.findById(cubeId);
+
+
+
 exports.create = async(cubeData) =>{
     const cube =new Cube(cubeData);
     await cube.save();

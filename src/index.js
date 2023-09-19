@@ -11,13 +11,16 @@ const dbConnect = require('./config/dbConfig');
 
 const PORT =5000;
 
+
+expressConfig(app);
+handlebarsConfig(app);
+
+
 dbConnect()
 .then(()=> console.log('DB Connected....'))
 .catch(err =>{
     console.log('DB error:', err);
 });
-expressConfig(app);
-handlebarsConfig(app);
 
 app.use(homeController);
 app.use('/cubes', cubeController);
