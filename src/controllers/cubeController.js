@@ -58,5 +58,9 @@ res.render('accessory/attach',{cube,accessories,hasAccessories});
         res.render('cubes/delete',{cube});
 
     })
+    router.post('/:cubeId/delete',async (req,res)=>{
+        await cubeManager.delete(req.params.cubeId);
+        res.redirect('/');
+    })
 
 module.exports=router;
