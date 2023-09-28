@@ -8,6 +8,10 @@ router.post('/register',async(req,res)=>{
 const {username,password,repeatPassword} = req.body;
 
 await userManager.register({username,password,repeatPassword});
-res.redirect('/')
+res.redirect('/users/login')
 });
 module.exports = router;
+
+router.get('/login',(req,res)=>{
+res.render('users/login');
+})
