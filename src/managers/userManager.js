@@ -1,5 +1,10 @@
 const User = require('../models/User');
 const bcript = require('bcrypt');
+const jwt = require('../lib/jsonWebToken');
+
+const SECRET ='someveryverylongsecret';
+
+
 exports.register = (userData) => User.create(userData);
 exports.login = async(username,password)=>{
 //ToDo find user
@@ -13,7 +18,13 @@ const isValid=await bcript.compare(password,user.password);
 if(!isValid){
     throw new Error('Cannot find username or password');
 }
+//create token
 
+const payload = {
+    _id: user._id,
+    username: user.username,
+}
+const token = await jwt.sign(payload,SECRET,{expiresIn:'2d'})
 // return user
-return user;
+return token;
 };
